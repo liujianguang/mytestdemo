@@ -50,6 +50,8 @@ public class HttpClientUtil {
 		HttpClient httpclient = new DefaultHttpClient();
 		// 创建Get方法实例
 		HttpGet httpgets = new HttpGet(url);
+		System.setProperty("sun.net.client.defaultConnectTimeout", String   
+                .valueOf(10000));// （单位：毫秒）
 		HttpResponse response = httpclient.execute(httpgets);
 		HttpEntity entity = response.getEntity();
 		if (entity != null) {
