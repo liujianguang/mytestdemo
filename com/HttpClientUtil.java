@@ -17,8 +17,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
@@ -52,6 +54,18 @@ public class HttpClientUtil {
 		HttpGet httpgets = new HttpGet(url);
 		System.setProperty("sun.net.client.defaultConnectTimeout", String   
                 .valueOf(10000));// （单位：毫秒）
+		Properties properties = System.getProperties();
+		Enumeration<Object> keys = properties.keys();
+		Object nextElement2 = keys.nextElement();
+		for (; nextElement2 != null;) {
+			System.out.println(nextElement2 + "=" + properties.get(nextElement2));
+			if (keys.hasMoreElements()) {
+				nextElement2 = keys.nextElement();
+			}else {
+				nextElement2 = null;
+			}
+		}
+		System.out.println();
 		HttpResponse response = httpclient.execute(httpgets);
 		HttpEntity entity = response.getEntity();
 		if (entity != null) {
